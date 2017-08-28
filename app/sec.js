@@ -1,4 +1,4 @@
-const letters = "abcdefghijklmnopqrstuvwxyz ".split('');
+const letters = "abcdefghijklmnopqrstuvwxyz".split('');
 
 const clean = (text) => {
   return text.toLowerCase().replace(/[^a-z\ ]+/g, "");
@@ -22,19 +22,25 @@ const index = (array, i) => {
   return array[i % array.length];
 }
 
-const encode = function(text, password) {
-  t = prepare(text);
-  p = prepare(password);
-  encoded = t.map((x, i) => { return x + index(p,i) });
-
-  return unprepare(encoded);
+const encode = function(text, password, decodeText=false) {
+  var passwordIndex = 0;
+  return text.split(" ").map( (word) => {
+    t = prepare(word);
+    p = prepare(password);
+    encoded = t.map((x) => {
+      var offset = index(p,passwordIndex);
+      if (decodeText) {
+        offset = -offset;
+      }
+      passwordIndex += 1;
+      return x + offset;
+    });
+    return unprepare(encoded);
+  }).join(" ");
 }
 
 const decode = function(text, password) {
-  t = prepare(text);
-  p = prepare(password);
-  encoded = t.map((x, i) => { return x - index(p,i) });
-  return unprepare(encoded);
+  return encode(text, password, true);
 }
 
 module.exports = {encode, decode, clean, prepare};

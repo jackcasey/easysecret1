@@ -4,6 +4,8 @@
   "private": true,
   "description": "includes all npm dependencies",
   "dependencies": {
-    "jest": "^20.0.4"
+    "brunch": "^2.10.10",
+    "jest": "^20.0.4",
+    "stylus-brunch": "^2.10.0"
   }
 }

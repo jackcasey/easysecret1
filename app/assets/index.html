@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Easy Secret</title>
+    <link rel = "stylesheet" type = "text/css" href = "./app.css" />
+    <script src="app.js"></script>
+    <script lang='javascript'>
+      ready = require('document.js').ready;
+      ready();
+    </script>
+  </head>
+
+  <body>
+    <h1>Easy Secret</h1>
+    <hr>
+    <div class="center">
+      <div class='block'>
+        <label for="decoded">Decoded:</label>
+        <br/>
+        <textarea id="decoded"></textarea>
+        <br/>
+        <button id="encode">Encode</button>
+      </div>
+      <div class='block'>
+        <label for="password">Passphrase:</label>
+        <br/>
+        <textarea id="password"></textarea>
+        <br/>
+        <p id="warning" style="display: none;">Warning: Passphrase should be at least as long as the text for best security.<p>
+      </div>
+      <div class='block'>
+        <label for="encoded">Encoded:</label>
+        <br/>
+        <textarea id="encoded"></textarea>
+        <br/>
+        <button id="decode">Decode</button>
+      </div>
+    </div>
+  </body>
+
+</html>
