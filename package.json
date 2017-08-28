@@ -1,0 +1,9 @@
+{
+  "name": "easysecret",
+  "version": "0.1.0",
+  "private": true,
+  "description": "includes all npm dependencies",
+  "dependencies": {
+    "jest": "^20.0.4"
+  }
+}
