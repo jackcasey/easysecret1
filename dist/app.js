@@ -170,6 +170,7 @@ module.exports = {
       const encodeButton = document.querySelectorAll("#encode")[0];
       const decoded = document.querySelectorAll("#decoded")[0];
       const decodeButton = document.querySelectorAll("#decode")[0];
+      const reverseButton = document.querySelectorAll("#reverse")[0];
       const password = document.querySelectorAll("#password")[0];
       const warning = document.querySelectorAll("#warning")[0];
 
@@ -189,6 +190,9 @@ module.exports = {
           warning.style.display = 'none';
         }
       });
+      reverseButton.addEventListener('click', (evt) => {
+        password.value = decode(encoded.value, decoded.value);
+      });
     });
   }
 };
@@ -196,10 +200,10 @@ module.exports = {
 });
 
 require.register("sec.js", function(exports, require, module) {
-const letters = "abcdefghijklmnopqrstuvwxyz".split('');
+const letters = "abcdefghijklmnopqrstuvwxyz ".split('');
 
 const clean = (text) => {
-  return text.toLowerCase().replace(/[^a-z\ ]+/g, "");
+  return text.toLowerCase().replace(/[^a-z]+/g, "")
 }
 
 // convert string into series of numbers
@@ -222,19 +226,15 @@ const index = (array, i) => {
 
 const encode = function(text, password, decodeText=false) {
   var passwordIndex = 0;
-  return text.split(" ").map( (word) => {
-    t = prepare(word);
-    p = prepare(password);
-    encoded = t.map((x) => {
-      var offset = index(p,passwordIndex);
-      if (decodeText) {
-        offset = -offset;
-      }
-      passwordIndex += 1;
-      return x + offset;
-    });
-    return unprepare(encoded);
-  }).join(" ");
+  p = prepare(password);
+  return unprepare(prepare(text).map((x) => {
+    var offset = index(p, passwordIndex);
+    if (decodeText) {
+      offset = -offset;
+    }
+    passwordIndex += 1;
+    return x + offset;
+  }));
 }
 
 const decode = function(text, password) {

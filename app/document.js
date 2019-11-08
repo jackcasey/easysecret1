@@ -20,6 +20,7 @@ module.exports = {
       const encodeButton = document.querySelectorAll("#encode")[0];
       const decoded = document.querySelectorAll("#decoded")[0];
       const decodeButton = document.querySelectorAll("#decode")[0];
+      const reverseButton = document.querySelectorAll("#reverse")[0];
       const password = document.querySelectorAll("#password")[0];
       const warning = document.querySelectorAll("#warning")[0];
 
@@ -38,6 +39,9 @@ module.exports = {
         } else {
           warning.style.display = 'none';
         }
+      });
+      reverseButton.addEventListener('click', (evt) => {
+        password.value = decode(encoded.value, decoded.value);
       });
     });
   }
